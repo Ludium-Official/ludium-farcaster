@@ -27,6 +27,17 @@ export const app = new Frog({
   hub: pinata(),
 });
 
+app.frame("/finish", (c) => {
+  return c.res({
+    image: (
+      <img
+        src="https://github.com/juniahn-dev/twitter/blob/main/assets/card-tx-bg.png?raw=true"
+        style={{ position: "absolute", top: 0, left: 0 }}
+      />
+    ),
+  });
+});
+
 app.frame("/approve/:gameId/:token", (c) => {
   const { gameId, token } = c.req.param();
 
@@ -42,7 +53,7 @@ app.frame("/approve/:gameId/:token", (c) => {
           style={{
             position: "absolute",
             bottom: "-280",
-            left: "39%",
+            left: "30%",
             fontSize: 50,
             fontWeight: "bold",
             color: "#fff",
@@ -184,17 +195,6 @@ app.transaction("/bet/:gameId/:status", async (c) => {
   }
 
   return betTx;
-});
-
-app.frame("/finish", (c) => {
-  return c.res({
-    image: (
-      <img
-        src="https://github.com/juniahn-dev/twitter/blob/main/assets/card-tx-bg.png?raw=true"
-        style={{ position: "absolute", top: 0, left: 0 }}
-      />
-    ),
-  });
 });
 
 // @ts-ignore
