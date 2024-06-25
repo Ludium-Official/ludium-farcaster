@@ -12,6 +12,44 @@ export const app = new Frog({
   hub: pinata(),
 });
 
+app.frame("/approve/:gameId", (c) => {
+  const gameId = c.req.param("gameId");
+
+  return c.res({
+    action: `/${gameId}`,
+    image: (
+      <div style={{ color: "white", display: "flex", fontSize: 60 }}>
+        Approve your account with tokens
+      </div>
+    ),
+    intents: [
+      <TextInput placeholder="Approve Amount Value" />,
+      <Button.Transaction target="/approve">APPROVE</Button.Transaction>,
+    ],
+  });
+});
+
+app.transaction("/approve", async (c) => {
+  const { inputText } = c;
+
+  const approveTx = await c.contract({
+    abi: betMemeAbi,
+    functionName: "approve",
+    args: [
+      "0x9c440521dF71e1242B8d1aEB9556EfE5c7a04867",
+      parseEther(inputText || "0"),
+    ],
+    chainId: `eip155:${baseSepolia.id}`,
+    to: "0xBE5Da172BbffffF5AEa27017745e71eA1907dad1",
+  });
+
+  if (approveTx.status !== "success") {
+    throw new Error("Approve transaction failed");
+  }
+
+  return approveTx;
+});
+
 app.frame("/:gameId", (c) => {
   const gameId = c.req.param("gameId");
 
@@ -24,10 +62,8 @@ app.frame("/:gameId", (c) => {
     ),
     intents: [
       <TextInput placeholder="Bet Value" />,
-      <Button.Transaction target={`/${gameId}/upBet`}>UP</Button.Transaction>,
-      <Button.Transaction target={`/${gameId}/downBet`}>
-        DOWN
-      </Button.Transaction>,
+      <Button.Transaction target={`/${gameId}/up`}>UP</Button.Transaction>,
+      <Button.Transaction target={`/${gameId}/down`}>DOWN</Button.Transaction>,
     ],
   });
 });
@@ -43,32 +79,26 @@ app.frame("/finish", (c) => {
   });
 });
 
-app.transaction("/:gameId/upBet", (c) => {
-  const gameId = c.req.param("gameId");
+app.transaction("/:gameId/:status", async (c) => {
+  const { gameId, status } = c.req.param();
   const uint256GameId = BigInt(gameId);
   const { inputText } = c;
 
-  return c.contract({
+  const betUp = status === "up" ? true : false;
+
+  const betTx = await c.contract({
     abi: betMemeAbi,
     functionName: "bet",
-    args: [uint256GameId, true, parseEther(inputText || "0")],
+    args: [uint256GameId, betUp, parseEther(inputText || "0")],
     chainId: `eip155:${baseSepolia.id}`,
-    to: "0x4a65BADe94B89214c243C4ea977B109d1Bc327Fb",
+    to: "0x9c440521dF71e1242B8d1aEB9556EfE5c7a04867",
   });
-});
 
-app.transaction("/:gameId/downBet", (c) => {
-  const gameId = c.req.param("gameId");
-  const uint256GameId = BigInt(gameId);
-  const { inputText } = c;
+  if (betTx.status !== "success") {
+    throw new Error("Bet transaction failed");
+  }
 
-  return c.contract({
-    abi: betMemeAbi,
-    functionName: "bet",
-    args: [uint256GameId, false, parseEther(inputText || "0")],
-    chainId: `eip155:${baseSepolia.id}`,
-    to: "0x4a65BADe94B89214c243C4ea977B109d1Bc327Fb",
-  });
+  return betTx;
 });
 
 // @ts-ignore
