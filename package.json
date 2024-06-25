@@ -1,9 +1,9 @@
 {
-  "name": "frog-mint",
+  "name": "bet-frame",
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "frog vercel-build",
+    "build": "next build",
     "dev": "frog dev",
     "deploy": "vercel"
   },
