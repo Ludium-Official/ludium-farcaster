@@ -5,7 +5,7 @@ import { pinata } from "frog/hubs";
 import { handle } from "frog/vercel";
 import { baseSepolia } from "viem/chains";
 import { betMemeAbi } from "../betMemeABI.js";
-import { changeTokenInfo } from "../functions/changeTokenInfo.js";
+import { changeBg, changeTokenInfo } from "../functions/changeTokenInfo.js";
 
 export const app = new Frog({
   assetsPath: "/",
@@ -48,46 +48,46 @@ app.frame("/approve/:gameId/:token", (c) => {
     image: (
       <>
         <img
-          src="https://github.com/juniahn-dev/twitter/blob/main/assets/card-bg.png?raw=true"
+          src={changeBg(token).background}
           style={{ position: "absolute", top: 0, left: 0 }}
           width="1200"
           height="630"
         />
-        <div
-          style={{
-            position: "absolute",
-            bottom: "-280",
-            left: "30%",
-            fontSize: 50,
-            fontWeight: "bold",
-            color: "#fff",
-          }}
-        >
-          Approve your token
-        </div>
-        <img
-          src={changeTokenInfo(token).image}
-          style={{
-            position: "absolute",
-            bottom: "-420",
-            right: "52%",
-            borderRadius: "50%",
-          }}
-          width="100px"
-          height="100px"
-        />
-        <div
-          style={{
-            position: "absolute",
-            bottom: "-400",
-            right: "41%",
-            fontSize: 50,
-            fontWeight: "bold",
-            color: "#fff",
-          }}
-        >
-          {changeTokenInfo(token).denom}
-        </div>
+        {changeBg(token).mainInfo && (
+          <img
+            src={changeBg(token).mainInfo!}
+            style={{ position: "absolute", top: 0, left: 0 }}
+            width="1200"
+            height="630"
+          />
+        )}
+        {!changeBg(token).mainInfo && (
+          <img
+            src={changeTokenInfo(token).image}
+            style={{
+              position: "absolute",
+              bottom: "-320",
+              right: "54%",
+              borderRadius: "50%",
+            }}
+            width="150px"
+            height="150px"
+          />
+        )}
+        {!changeBg(token).mainInfo && (
+          <div
+            style={{
+              position: "absolute",
+              bottom: "-290",
+              right: "35%",
+              fontSize: 70,
+              fontWeight: "bold",
+              color: "#fff",
+            }}
+          >
+            {changeTokenInfo(token).denom}
+          </div>
+        )}
       </>
     ),
     intents: [
@@ -129,7 +129,7 @@ app.frame("/:gameId/:token", (c) => {
     image: (
       <>
         <img
-          src="https://github.com/juniahn-dev/twitter/blob/main/assets/card-bg.png?raw=true"
+          src={changeBg(token).background}
           style={{ position: "absolute", top: 0, left: 0 }}
           width="1200"
           height="630"

@@ -2,8 +2,8 @@ export const changeTokenInfo = (address: string) => {
   if (address.indexOf("0xBE5Da172BbffffF5AEa27017745e71eA1907dad1") >= 0) {
     return {
       image:
-        "https://assets.coingecko.com/coins/images/33610/standard/pug-head.png",
-      denom: "PUD",
+        "https://github.com/juniahn-dev/twitter/blob/main/assets/BRETT-token.png?raw=true",
+      denom: "BRETT",
       address,
     };
   } else if (
@@ -11,16 +11,33 @@ export const changeTokenInfo = (address: string) => {
   ) {
     return {
       image:
-        "https://assets.coingecko.com/coins/images/877/standard/chainlink-new-logo.png?1696502009",
-      denom: "LINK",
+        "https://github.com/juniahn-dev/twitter/blob/main/assets/TOSHI-token.png?raw=true",
+      denom: "TOSHI",
       address,
     };
   } else {
     return {
       image:
-        "https://www.geckoterminal.com/_next/image?url=https%3A%2F%2Fcoin-images.coingecko.com%2Fcoins%2Fimages%2F32528%2Fsmall%2Fmemecoin_%25282%2529.png%3F1698912168&w=64&q=75",
-      denom: "MEME",
+        "https://github.com/juniahn-dev/twitter/blob/main/assets/INU-token.png?raw=true",
+      denom: "BSHIB",
       address,
+    };
+  }
+};
+
+export const changeBg = (address: string) => {
+  if (address.indexOf("0xBE5Da172BbffffF5AEa27017745e71eA1907dad1") >= 0) {
+    return {
+      background:
+        "https://github.com/juniahn-dev/twitter/blob/main/assets/brett-bet-bg.png?raw=true",
+      mainInfo:
+        "https://github.com/juniahn-dev/twitter/blob/main/assets/brett-token.png?raw=true",
+    };
+  } else {
+    return {
+      background:
+        "https://github.com/juniahn-dev/twitter/blob/main/assets/bet-bg.png?raw=true",
+      mainInfo: null,
     };
   }
 };
