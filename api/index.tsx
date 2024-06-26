@@ -134,41 +134,41 @@ app.frame("/:gameId/:token", (c) => {
           width="1200"
           height="630"
         />
-        <div
-          style={{
-            position: "absolute",
-            bottom: "-280",
-            left: "39%",
-            fontSize: 50,
-            fontWeight: "bold",
-            color: "#fff",
-          }}
-        >
-          Let's Bet!!!
-        </div>
-        <img
-          src={changeTokenInfo(token).image}
-          style={{
-            position: "absolute",
-            bottom: "-420",
-            right: "52%",
-            borderRadius: "50%",
-          }}
-          width="100px"
-          height="100px"
-        />
-        <div
-          style={{
-            position: "absolute",
-            bottom: "-400",
-            right: "41%",
-            fontSize: 50,
-            fontWeight: "bold",
-            color: "#fff",
-          }}
-        >
-          {changeTokenInfo(token).denom}
-        </div>
+        {changeBg(token).mainInfo && (
+          <img
+            src={changeBg(token).mainInfo!}
+            style={{ position: "absolute", top: 0, left: 0 }}
+            width="1200"
+            height="630"
+          />
+        )}
+        {!changeBg(token).mainInfo && (
+          <img
+            src={changeTokenInfo(token).image}
+            style={{
+              position: "absolute",
+              bottom: "-320",
+              right: "54%",
+              borderRadius: "50%",
+            }}
+            width="150px"
+            height="150px"
+          />
+        )}
+        {!changeBg(token).mainInfo && (
+          <div
+            style={{
+              position: "absolute",
+              bottom: "-290",
+              right: "35%",
+              fontSize: 70,
+              fontWeight: "bold",
+              color: "#fff",
+            }}
+          >
+            {changeTokenInfo(token).denom}
+          </div>
+        )}
       </>
     ),
     intents: [
