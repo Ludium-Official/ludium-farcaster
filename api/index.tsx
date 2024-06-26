@@ -33,6 +33,8 @@ app.frame("/finish", (c) => {
       <img
         src="https://github.com/juniahn-dev/twitter/blob/main/assets/card-tx-bg.png?raw=true"
         style={{ position: "absolute", top: 0, left: 0 }}
+        width="1200"
+        height="630"
       />
     ),
   });
@@ -48,6 +50,8 @@ app.frame("/approve/:gameId/:token", (c) => {
         <img
           src="https://github.com/juniahn-dev/twitter/blob/main/assets/card-bg.png?raw=true"
           style={{ position: "absolute", top: 0, left: 0 }}
+          width="1200"
+          height="630"
         />
         <div
           style={{
@@ -67,10 +71,10 @@ app.frame("/approve/:gameId/:token", (c) => {
             position: "absolute",
             bottom: "-420",
             right: "52%",
-            width: "100px",
-            height: "100px",
             borderRadius: "50%",
           }}
+          width="100px"
+          height="100px"
         />
         <div
           style={{
@@ -127,6 +131,8 @@ app.frame("/:gameId/:token", (c) => {
         <img
           src="https://github.com/juniahn-dev/twitter/blob/main/assets/card-bg.png?raw=true"
           style={{ position: "absolute", top: 0, left: 0 }}
+          width="1200"
+          height="630"
         />
         <div
           style={{
@@ -146,10 +152,10 @@ app.frame("/:gameId/:token", (c) => {
             position: "absolute",
             bottom: "-420",
             right: "52%",
-            width: "100px",
-            height: "100px",
             borderRadius: "50%",
           }}
+          width="100px"
+          height="100px"
         />
         <div
           style={{
