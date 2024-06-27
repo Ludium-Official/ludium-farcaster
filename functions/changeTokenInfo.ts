@@ -25,18 +25,20 @@ export const changeTokenInfo = (address: string) => {
   }
 };
 
-export const changeBg = (address: string) => {
+export const changeBg = (address: string, approve?: boolean) => {
   if (address.indexOf("0xBE5Da172BbffffF5AEa27017745e71eA1907dad1") >= 0) {
     return {
       background:
         "https://github.com/juniahn-dev/twitter/blob/main/assets/brett-bet-bg.png?raw=true",
-      mainInfo:
-        "https://github.com/juniahn-dev/twitter/blob/main/assets/brett-token.png?raw=true",
+      mainInfo: approve
+        ? "https://github.com/juniahn-dev/twitter/blob/main/assets/approve-brett-token-info.png?raw=true"
+        : "https://github.com/juniahn-dev/twitter/blob/main/assets/brett-token-info.png?raw=true",
     };
   } else {
     return {
-      background:
-        "https://github.com/juniahn-dev/twitter/blob/main/assets/bet-bg.png?raw=true",
+      background: approve
+        ? "https://github.com/juniahn-dev/twitter/blob/main/assets/approve-bg.png?raw=true"
+        : "https://github.com/juniahn-dev/twitter/blob/main/assets/bet-bg.png?raw=true",
       mainInfo: null,
     };
   }

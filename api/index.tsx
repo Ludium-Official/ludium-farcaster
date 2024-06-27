@@ -37,6 +37,11 @@ app.frame("/finish", (c) => {
         height="630"
       />
     ),
+    intents: [
+      <Button.Link href="https://bet-meme-base.vercel.app">
+        GO TO BetMeme
+      </Button.Link>,
+    ],
   });
 });
 
@@ -69,20 +74,20 @@ app.frame("/approve/:gameId/:token/:time", (c) => {
     image: (
       <>
         <img
-          src={changeBg(token).background}
+          src={changeBg(token, true).background}
           style={{ position: "absolute", top: 0, left: 0 }}
           width="1200"
           height="630"
         />
-        {changeBg(token).mainInfo && (
+        {changeBg(token, true).mainInfo && (
           <img
-            src={changeBg(token).mainInfo!}
+            src={changeBg(token, true).mainInfo!}
             style={{ position: "absolute", top: 0, left: 0 }}
             width="1200"
             height="630"
           />
         )}
-        {!changeBg(token).mainInfo && (
+        {!changeBg(token, true).mainInfo && (
           <img
             src={changeTokenInfo(token).image}
             style={{
@@ -95,7 +100,7 @@ app.frame("/approve/:gameId/:token/:time", (c) => {
             height="150px"
           />
         )}
-        {!changeBg(token).mainInfo && (
+        {!changeBg(token, true).mainInfo && (
           <div
             style={{
               position: "absolute",
