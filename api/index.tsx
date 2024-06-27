@@ -40,11 +40,32 @@ app.frame("/finish", (c) => {
   });
 });
 
-app.frame("/approve/:gameId/:token", (c) => {
-  const { gameId, token } = c.req.param();
+app.frame("/approve/:gameId/:token/:time", (c) => {
+  const { gameId, token, time } = c.req.param();
+  const times = new Date(Number(time) * 1000);
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const year = times.getFullYear();
+  const date = times.getDate();
+  const month = months[times.getMonth()];
+  const hour = times.getHours();
+  const minute = times.getMinutes();
+  const fullDate = `${date}, ${month}, ${year} ${hour}:${minute}`;
 
   return c.res({
-    action: `/${gameId}/${token}`,
+    action: `/${gameId}/${token}/time/${time}`,
     image: (
       <>
         <img
@@ -88,6 +109,35 @@ app.frame("/approve/:gameId/:token", (c) => {
             {changeTokenInfo(token).denom}
           </div>
         )}
+        <div
+          style={{
+            position: "absolute",
+            bottom: "-555",
+            right: "56%",
+
+            padding: "10px",
+            border: "2px solid #fff",
+            borderRadius: "30px",
+
+            fontSize: 25,
+            fontWeight: "bold",
+            color: "#fff",
+          }}
+        >
+          End Time
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            bottom: "-545",
+            right: "32%",
+            fontSize: 30,
+            fontWeight: "bold",
+            color: "#fff",
+          }}
+        >
+          {fullDate}
+        </div>
       </>
     ),
     intents: [
@@ -121,8 +171,29 @@ app.transaction("/approve/:token", async (c) => {
   return approveTx;
 });
 
-app.frame("/:gameId/:token", (c) => {
-  const { gameId, token } = c.req.param();
+app.frame("/:gameId/:token/time/:time", (c) => {
+  const { gameId, token, time } = c.req.param();
+  const times = new Date(Number(time) * 1000);
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const year = times.getFullYear();
+  const date = times.getDate();
+  const month = months[times.getMonth()];
+  const hour = times.getHours();
+  const minute = times.getMinutes();
+  const fullDate = `${date}, ${month}, ${year} ${hour}:${minute}`;
 
   return c.res({
     action: "/finish",
@@ -169,6 +240,35 @@ app.frame("/:gameId/:token", (c) => {
             {changeTokenInfo(token).denom}
           </div>
         )}
+        <div
+          style={{
+            position: "absolute",
+            bottom: "-555",
+            right: "56%",
+
+            padding: "10px",
+            border: "2px solid #fff",
+            borderRadius: "30px",
+
+            fontSize: 25,
+            fontWeight: "bold",
+            color: "#fff",
+          }}
+        >
+          End Time
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            bottom: "-545",
+            right: "32%",
+            fontSize: 30,
+            fontWeight: "bold",
+            color: "#fff",
+          }}
+        >
+          {fullDate}
+        </div>
       </>
     ),
     intents: [
