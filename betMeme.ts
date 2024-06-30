@@ -1,3 +1,6 @@
+export const betMemeContractAddress =
+  "0x358686178A7F2A87c9CAeE638d8c3DB0e199b5Ef";
+
 export const betMemeAbi = [
   {
     inputs: [
@@ -118,6 +121,19 @@ export const betMemeAbi = [
     type: "event",
   },
   {
+    inputs: [],
+    name: "WETH",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [
       {
         internalType: "uint256",
@@ -157,11 +173,6 @@ export const betMemeAbi = [
     inputs: [
       {
         internalType: "uint256",
-        name: "markedPrice",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
         name: "duration",
         type: "uint256",
       },
@@ -188,15 +199,23 @@ export const betMemeAbi = [
         name: "gameId",
         type: "uint256",
       },
-      {
-        internalType: "uint256",
-        name: "lastPrice",
-        type: "uint256",
-      },
     ],
     name: "endGame",
     outputs: [],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "factory",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
   {
@@ -582,6 +601,49 @@ export const betMemeAbi = [
         internalType: "struct BetMeme.Game[]",
         name: "",
         type: "tuple[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "pair",
+        type: "address",
+      },
+    ],
+    name: "getReserves",
+    outputs: [
+      {
+        internalType: "uint112",
+        name: "reserve0",
+        type: "uint112",
+      },
+      {
+        internalType: "uint112",
+        name: "reserve1",
+        type: "uint112",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "otherToken",
+        type: "address",
+      },
+    ],
+    name: "getTokenPrice",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "priceWETH",
+        type: "uint256",
       },
     ],
     stateMutability: "view",

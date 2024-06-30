@@ -1,5 +1,5 @@
 export const changeTokenInfo = (address: string) => {
-  if (address.indexOf("0xBE5Da172BbffffF5AEa27017745e71eA1907dad1") >= 0) {
+  if (address.indexOf("0xb1E8b5F91938868CB0E1d50958D56e2497827f2A") >= 0) {
     return {
       image:
         "https://github.com/juniahn-dev/twitter/blob/main/assets/BRETT-token.png?raw=true",
@@ -7,7 +7,7 @@ export const changeTokenInfo = (address: string) => {
       address,
     };
   } else if (
-    address.indexOf("0xE4aB69C077896252FAFBD49EFD26B5D171A32410") >= 0
+    address.indexOf("0x36e23aCAa237fdD90180Fe6B7d2630e53DB61924") >= 0
   ) {
     return {
       image:
@@ -26,7 +26,7 @@ export const changeTokenInfo = (address: string) => {
 };
 
 export const changeBg = (address: string, approve?: boolean) => {
-  if (address.indexOf("0xBE5Da172BbffffF5AEa27017745e71eA1907dad1") >= 0) {
+  if (address.indexOf("0xb1E8b5F91938868CB0E1d50958D56e2497827f2A") >= 0) {
     return {
       background:
         "https://github.com/juniahn-dev/twitter/blob/main/assets/brett-bet-bg.png?raw=true",

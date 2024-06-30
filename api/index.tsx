@@ -4,7 +4,7 @@ import { serveStatic } from "frog/serve-static";
 import { pinata } from "frog/hubs";
 import { handle } from "frog/vercel";
 import { baseSepolia } from "viem/chains";
-import { betMemeAbi } from "../betMemeABI.js";
+import { betMemeAbi, betMemeContractAddress } from "../betMeme.js";
 import { changeBg, changeTokenInfo } from "../functions/changeTokenInfo.js";
 
 export const app = new Frog({
@@ -38,9 +38,7 @@ app.frame("/finish", (c) => {
       />
     ),
     intents: [
-      <Button.Link href="https://bet-meme-base.vercel.app">
-        GO TO BetMeme
-      </Button.Link>,
+      <Button.Link href="https://betmeme.online">GO to BetMeme</Button.Link>,
     ],
   });
 });
@@ -154,17 +152,14 @@ app.frame("/approve/:gameId/:token/:time", (c) => {
   });
 });
 
-app.transaction("/approve/:token", async (c) => {
+app.transaction("/approve/:token", (c) => {
   const { token } = c.req.param();
   const { inputText } = c;
 
-  const approveTx = await c.contract({
+  const approveTx = c.contract({
     abi: betMemeAbi,
     functionName: "approve",
-    args: [
-      "0x3D50b0272c674CEF774738D0CEedDF095C13f9d2",
-      parseEther(inputText || "0"),
-    ],
+    args: [betMemeContractAddress, parseEther(inputText || "0")],
     chainId: `eip155:${baseSepolia.id}`,
     to: token as `0x${string}`,
   });
@@ -286,19 +281,19 @@ app.frame("/:gameId/:token/time/:time", (c) => {
   });
 });
 
-app.transaction("/bet/:gameId/:status", async (c) => {
+app.transaction("/bet/:gameId/:status", (c) => {
   const { gameId, status } = c.req.param();
   const uint256GameId = BigInt(gameId);
   const { inputText } = c;
 
   const betUp = status === "up" ? true : false;
 
-  const betTx = await c.contract({
+  const betTx = c.contract({
     abi: betMemeAbi,
     functionName: "bet",
     args: [uint256GameId, betUp, parseEther(inputText || "0")],
     chainId: `eip155:${baseSepolia.id}`,
-    to: "0x3D50b0272c674CEF774738D0CEedDF095C13f9d2",
+    to: betMemeContractAddress,
   });
 
   if (betTx.status !== "success") {
