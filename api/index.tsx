@@ -69,10 +69,29 @@ app.frame("/programs/:title/:programId/:deadline/:price/:token", (c) => {
         <div
           style={{
             position: "absolute",
-            bottom: "-350",
+            bottom: "-230",
             left: "50%",
             transform: "translate(-50%, -50%)",
             fontSize: 40,
+            fontWeight: "bold",
+            color: "#fff",
+          }}
+        >
+          New Program
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            bottom: "-350",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+
+            width: "80%",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+
+            fontSize: 50,
             fontWeight: "bold",
             color: "#fff",
           }}
@@ -140,7 +159,7 @@ app.frame("/programs/:title/:programId/:deadline/:price/:token", (c) => {
     ),
     intents: [
       <Button.Link href={`https://www.ludium.world/programs/${programId}`}>
-        GO check Program!
+        Check Detail!
       </Button.Link>,
     ],
   });
