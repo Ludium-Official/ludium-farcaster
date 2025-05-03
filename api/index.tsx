@@ -57,7 +57,7 @@ app.frame("/programs/:title/:programId/:deadline/:price/:token", (c) => {
     image: (
       <>
         <img
-          src="https://github.com/juniahn-dev/twitter/blob/main/assets/card-tx-bg.png?raw=true"
+          src="https://github.com/Ludium-Official/ludium-farcaster/blob/main/assets/DarkBackground.png?raw=true"
           style={{
             position: "absolute",
             top: 0,
