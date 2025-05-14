@@ -86,10 +86,11 @@ app.frame("/programs/:title/:programId/:deadline/:price/:token", (c) => {
             left: "50%",
             transform: "translate(-50%, -50%)",
 
-            width: "80%",
             overflow: "hidden",
             textOverflow: "ellipsis",
             whiteSpace: "nowrap",
+
+            maxWidth: title.length > 35 ? "80%" : "100%",
 
             fontSize: 50,
             fontWeight: "bold",
@@ -158,7 +159,9 @@ app.frame("/programs/:title/:programId/:deadline/:price/:token", (c) => {
       </>
     ),
     intents: [
-      <Button.Link href={`https://www.ludium.world/programs/${programId}`}>
+      <Button.Link
+        href={`https://ludium-basebatch.vercel.app/programs/${programId}`}
+      >
         Check Detail!
       </Button.Link>,
     ],
